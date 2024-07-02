@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:weather_app/core/constants/api_constants.dart';
 import 'package:weather_app/core/error/exceptions.dart';
 import 'package:weather_app/features/search_city/data/model/weather_model.dart';
 import 'package:http/http.dart' as http;
@@ -15,7 +16,7 @@ class WeatherRemoteDatasourceImpl implements WeatherRemoteDatasource {
   Future<WeatherModel> getWeatherDetails(String city) async {
     try {
       final response = await http.get(Uri.parse(
-          "https://api.openweathermap.org/data/2.5/weather?q=$city&appid=2d0b4437ac83074c8e944738118b97f4"));
+          "https://api.openweathermap.org/data/2.5/weather?q=$city&appid=${ApiConstants.API_KEY}"));
 
       final body = jsonDecode(response.body);
       if (response.statusCode == 200) {
